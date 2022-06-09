@@ -16,6 +16,7 @@ public class Pedido {
     private Farmaceutico farmaceutico;
     private Cliente cliente;
     private List<Produto> produtos;
+    private List<ItemPedido> itemPedidos;
     private BigDecimal valor;
     private BigDecimal valorPago;
     private BigDecimal troco;

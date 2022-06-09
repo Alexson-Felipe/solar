@@ -10,6 +10,5 @@ public class ItemPedidoModel {
 
     private Produto produto;
     private Integer quantidade;
-    private BigDecimal valor;
 
 }

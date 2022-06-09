@@ -13,7 +13,7 @@ public class ItemPedido {
     private Integer quantidade;
     private BigDecimal valor;
 
-    public ItemPedido(Produto produto, Integer quantidade, BigDecimal valor) {
+    public ItemPedido(Produto produto, Integer quantidade) {
         this.id = UUID.randomUUID();
         this.produto = produto;
         this.quantidade = quantidade;
