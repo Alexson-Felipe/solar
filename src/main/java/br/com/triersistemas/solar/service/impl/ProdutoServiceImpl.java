@@ -28,6 +28,13 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
+    public Produto consultar(List<UUID> idProdutos) {
+        var idP = idProdutos.stream().filter(p -> p.equals(produtoRepository.consultar())).findFirst().orElseThrow(NaoExisteException::new);
+        return produtoRepository.consultar(idP).orElseThrow(NaoExisteException::new);
+
+    }
+
+    @Override
     public Produto cadastrar(ProdutoModel model) {
         Produto produto = new Produto(model.getNome(), model.getValor());
         produtoRepository.cadastrar(produto);

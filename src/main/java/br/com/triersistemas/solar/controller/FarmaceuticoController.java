@@ -1,11 +1,11 @@
 package br.com.triersistemas.solar.controller;
 
 import br.com.triersistemas.solar.domain.Farmaceutico;
-import br.com.triersistemas.solar.exceptions.NaoExisteException;
 import br.com.triersistemas.solar.model.FarmaceuticoModel;
+import br.com.triersistemas.solar.service.FarmaceuticoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,44 +13,32 @@ import java.util.UUID;
 @RequestMapping("/farmaceutico")
 public class FarmaceuticoController {
 
-    public static final List<Farmaceutico> LIST = new ArrayList<>();
+
+    @Autowired
+    private FarmaceuticoService farmaceuticoService;
 
     @GetMapping("/consultar")
     public List<Farmaceutico> consultar() {
-        return LIST;
+        return farmaceuticoService.consultar();
     }
 
     @PostMapping("/cadastrar-randon")
     public Farmaceutico cadastrarRandon() {
-        final var f = new Farmaceutico();
-        LIST.add(f);
-        return f;
+        return farmaceuticoService.cadastrarRandon();
     }
 
     @PostMapping("/cadastrar")
     public Farmaceutico cadastrar(@RequestBody FarmaceuticoModel model) {
-        var f = new Farmaceutico(model.getNome(), model.getAniver(), model.getCpf());
-        LIST.add(f);
-        return f;
+        return farmaceuticoService.cadastrar(model);
     }
 
     @PutMapping("/alterar/{id}")
-    public Farmaceutico remover(@PathVariable UUID id, @RequestBody FarmaceuticoModel model) {
-        var domain = LIST.stream()
-                .filter(x -> x.getId().equals(id))
-                .findFirst()
-                .orElseThrow(NaoExisteException::new);
-        domain.editar(model.getNome(), model.getAniver(), model.getCpf());
-        return domain;
+    public Farmaceutico alterar(@PathVariable UUID id, @RequestBody FarmaceuticoModel model) {
+        return farmaceuticoService.alterar(id, model);
     }
 
     @DeleteMapping("/remover/{id}")
     public Farmaceutico remover(@PathVariable UUID id) {
-        var domain = LIST.stream()
-                .filter(x -> x.getId().equals(id))
-                .findFirst()
-                .orElseThrow(NaoExisteException::new);
-        LIST.remove(domain);
-        return domain;
+        return farmaceuticoService.remover(id);
     }
 }

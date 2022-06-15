@@ -12,7 +12,6 @@ public interface PedidoService {
 
     List<Pedido> consultar();
     Pedido consultar(UUID id);
-    Pedido consultar(List<UUID> idProdutos);
     Pedido cadastrar(PedidoModel model);
     Pedido adicionarProdutos(UUID id, AdicionarPedidoModel model);
     Pedido pagar(UUID id, PagarPedidoModel model);

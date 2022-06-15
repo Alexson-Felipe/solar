@@ -12,7 +12,7 @@ import java.util.UUID;
 @Repository
 public class PedidoRepositoryImpl implements PedidoRepository {
 
-    public static final List<Pedido> LIST = new ArrayList<>();
+    private static final List<Pedido> LIST = new ArrayList<>();
 
 
     @Override
