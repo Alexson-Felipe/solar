@@ -8,6 +8,7 @@ import br.com.triersistemas.solar.model.PedidoModel;
 import java.util.List;
 import java.util.UUID;
 
+
 public interface PedidoService {
 
     List<Pedido> consultar();
