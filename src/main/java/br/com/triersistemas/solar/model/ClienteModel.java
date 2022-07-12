@@ -15,6 +15,9 @@ public class ClienteModel {
     private LocalDate aniver;
     private String cpf;
     private String email;
+    private Long idade;
+    private String documento;
+    private Boolean documentoValido;
 
     public ClienteModel(Cliente cliente){
         this.id = cliente.getId();
@@ -22,5 +25,9 @@ public class ClienteModel {
         this.aniver = cliente.getAniver();
         this.cpf = cliente.getDocumento();
         this.email = cliente.getEmail();
+
+        this.idade = cliente.getIdade();
+        this.documento = this.cpf;
+        this.documentoValido = cliente.getDocumentoValido();
     }
 }

@@ -19,40 +19,44 @@ public class FarmaceuticoServiceImpl implements FarmaceuticoService {
 
 
     @Override
-    public List<Farmaceutico> consultar() {
-        return farmaceuticoRepository.consultar();
+    public List<FarmaceuticoModel> consultar() {
+        return farmaceuticoRepository.findAll().stream().map(FarmaceuticoModel::new).toList();
     }
 
     @Override
-    public Farmaceutico consultar(UUID id) {
-        return farmaceuticoRepository.consultar(id).orElseThrow(NaoExisteException::new);
+    public FarmaceuticoModel consultar(UUID id) {
+        return new FarmaceuticoModel(this.buscarFarmaceuticoId(id));
     }
 
     @Override
-    public Farmaceutico cadastrar(FarmaceuticoModel model) {
-        var farmaceutico = new Farmaceutico(model.getNome(), model.getAniver(), model.getCpf());
-        farmaceuticoRepository.cadastrar(farmaceutico);
-        return farmaceutico;
+    public FarmaceuticoModel cadastrar(FarmaceuticoModel model) {
+        var farmaceutico = new Farmaceutico(model);
+        return new FarmaceuticoModel(farmaceuticoRepository.save(farmaceutico));
     }
 
     @Override
-    public Farmaceutico cadastrarRandon() {
+    public FarmaceuticoModel cadastrarRandon() {
         var farmaceutico = new Farmaceutico();
-        farmaceuticoRepository.cadastrar(farmaceutico);
-        return farmaceutico;
+        return new FarmaceuticoModel(farmaceuticoRepository.save(farmaceutico));
     }
 
     @Override
-    public Farmaceutico alterar(UUID id, FarmaceuticoModel model) {
-        Farmaceutico farmaceutico = this.consultar(id);
+    public FarmaceuticoModel alterar(FarmaceuticoModel model) {
+        Farmaceutico farmaceutico = this.buscarFarmaceuticoId(model.getId());
         farmaceutico.editar(model.getNome(), model.getAniver(), model.getCpf());
-        return farmaceutico;
+        return new FarmaceuticoModel(this.farmaceuticoRepository.save(farmaceutico));
     }
 
     @Override
-    public Farmaceutico remover(UUID id) {
-        Farmaceutico farmaceutico = this.consultar(id);
-        farmaceuticoRepository.remover(farmaceutico);
-        return farmaceutico;
+    public FarmaceuticoModel remover(UUID id) {
+        Farmaceutico farmaceutico = this.buscarFarmaceuticoId(id);
+        farmaceuticoRepository.delete(farmaceutico);
+        return new FarmaceuticoModel(farmaceutico);
+    }
+
+    private Farmaceutico buscarFarmaceuticoId(UUID id) {
+        return farmaceuticoRepository
+                .findById(id)
+                .orElseThrow(NaoExisteException::new);
     }
 }

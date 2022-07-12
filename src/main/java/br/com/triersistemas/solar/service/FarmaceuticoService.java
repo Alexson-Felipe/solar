@@ -1,6 +1,5 @@
 package br.com.triersistemas.solar.service;
 
-import br.com.triersistemas.solar.domain.Farmaceutico;
 import br.com.triersistemas.solar.model.FarmaceuticoModel;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +8,11 @@ import java.util.UUID;
 @Service
 public interface FarmaceuticoService {
 
-    List<Farmaceutico> consultar();
-    Farmaceutico consultar(UUID id);
-    Farmaceutico cadastrar(FarmaceuticoModel model);
-    Farmaceutico cadastrarRandon();
-    Farmaceutico alterar(UUID id, FarmaceuticoModel model);
-    Farmaceutico remover(UUID id);
+    List<FarmaceuticoModel> consultar();
+    FarmaceuticoModel consultar(UUID id);
+    FarmaceuticoModel cadastrar(FarmaceuticoModel model);
+    FarmaceuticoModel cadastrarRandon();
+    FarmaceuticoModel alterar(FarmaceuticoModel model);
+    FarmaceuticoModel remover(UUID id);
 
 }

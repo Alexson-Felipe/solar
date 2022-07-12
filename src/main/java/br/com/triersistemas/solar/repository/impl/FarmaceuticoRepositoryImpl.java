@@ -1,17 +1,8 @@
 package br.com.triersistemas.solar.repository.impl;
 
-import br.com.triersistemas.solar.domain.Farmaceutico;
-import br.com.triersistemas.solar.repository.FarmaceuticoRepository;
-import org.springframework.stereotype.Repository;
+public class FarmaceuticoRepositoryImpl  {
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-@Repository
-public class FarmaceuticoRepositoryImpl implements FarmaceuticoRepository {
-
+    /*
     private static final List<Farmaceutico> LIST = new ArrayList<>();
 
 
@@ -36,4 +27,6 @@ public class FarmaceuticoRepositoryImpl implements FarmaceuticoRepository {
     public void remover(Farmaceutico farmaceutico) {
         LIST.remove(farmaceutico);
     }
+
+     */
 }

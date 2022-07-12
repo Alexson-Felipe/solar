@@ -1,6 +1,5 @@
 package br.com.triersistemas.solar.controller;
 
-import br.com.triersistemas.solar.domain.Farmaceutico;
 import br.com.triersistemas.solar.model.FarmaceuticoModel;
 import br.com.triersistemas.solar.service.FarmaceuticoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,27 +17,32 @@ public class FarmaceuticoController {
     private FarmaceuticoService farmaceuticoService;
 
     @GetMapping("/consultar")
-    public List<Farmaceutico> consultar() {
+    public List<FarmaceuticoModel> consultar() {
         return farmaceuticoService.consultar();
     }
 
+    @GetMapping("/consultar/{id}")
+    public FarmaceuticoModel consultar(@PathVariable UUID id) {
+        return farmaceuticoService.consultar(id);
+    }
+
     @PostMapping("/cadastrar-randon")
-    public Farmaceutico cadastrarRandon() {
+    public FarmaceuticoModel cadastrarRandon() {
         return farmaceuticoService.cadastrarRandon();
     }
 
     @PostMapping("/cadastrar")
-    public Farmaceutico cadastrar(@RequestBody FarmaceuticoModel model) {
+    public FarmaceuticoModel cadastrar(@RequestBody FarmaceuticoModel model) {
         return farmaceuticoService.cadastrar(model);
     }
 
-    @PutMapping("/alterar/{id}")
-    public Farmaceutico alterar(@PathVariable UUID id, @RequestBody FarmaceuticoModel model) {
-        return farmaceuticoService.alterar(id, model);
+    @PutMapping("/alterar")
+    public FarmaceuticoModel alterar(@RequestBody FarmaceuticoModel model) {
+        return farmaceuticoService.alterar(model);
     }
 
     @DeleteMapping("/remover/{id}")
-    public Farmaceutico remover(@PathVariable UUID id) {
+    public FarmaceuticoModel remover(@PathVariable UUID id) {
         return farmaceuticoService.remover(id);
     }
 }

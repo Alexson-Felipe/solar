@@ -4,6 +4,7 @@ import br.com.triersistemas.solar.model.ClienteModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Table(name = "cliente")
 public class Cliente extends PessoaFisica {
 
+    @Column(name = "email")
     private String email;
 
     public Cliente(final String nome,
