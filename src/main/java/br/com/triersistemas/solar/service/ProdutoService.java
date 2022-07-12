@@ -8,11 +8,11 @@ import java.util.UUID;
 
 public interface ProdutoService {
 
-    List<Produto> consultar();
-    Produto consultar(UUID id);
-    Produto consultar(List<UUID> idProdutos);
-    Produto cadastrar(ProdutoModel model);
-    Produto alterar(UUID id, ProdutoModel model);
+    List<ProdutoModel> consultar();
+    ProdutoModel consultar(UUID id);
+    ProdutoModel consultar(List<UUID> idProdutos);
+    ProdutoModel cadastrar(ProdutoModel model);
+    ProdutoModel alterar(ProdutoModel model);
 
-    Produto remover(UUID id);
+    ProdutoModel remover(UUID id);
 }

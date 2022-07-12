@@ -1,5 +1,6 @@
 package br.com.triersistemas.solar.service.impl;
 
+import br.com.triersistemas.solar.domain.Cliente;
 import br.com.triersistemas.solar.domain.Produto;
 import br.com.triersistemas.solar.exceptions.NaoExisteException;
 import br.com.triersistemas.solar.model.ProdutoModel;
@@ -18,39 +19,45 @@ public class ProdutoServiceImpl implements ProdutoService {
     private ProdutoRepository produtoRepository;
 
     @Override
-    public List<Produto> consultar() {
-        return produtoRepository.consultar();
+    public List<ProdutoModel> consultar() {
+        return produtoRepository.findAll().stream().map(ProdutoModel::new).toList();
     }
 
     @Override
-    public Produto consultar(UUID id) {
-        return produtoRepository.consultar(id).orElseThrow(NaoExisteException::new);
+    public ProdutoModel consultar(UUID id) {
+        return new ProdutoModel(this.buscarProdutoId(id));
     }
 
     @Override
-    public Produto consultar(List<UUID> idProdutos) {
-        var idP = idProdutos.stream().filter(p -> p.equals(produtoRepository.consultar())).findFirst().orElseThrow(NaoExisteException::new);
-        return produtoRepository.consultar(idP).orElseThrow(NaoExisteException::new);
+    public ProdutoModel consultar(List<UUID> idProdutos) {
+        var idP = idProdutos.stream().filter(p -> p.equals(produtoRepository.findAll())).findFirst().orElseThrow(NaoExisteException::new);
+        return new ProdutoModel(this.buscarProdutoId(idP));
 
     }
 
     @Override
-    public Produto cadastrar(ProdutoModel model) {
-        Produto produto = new Produto(model.getNome(), model.getValor());
-        produtoRepository.cadastrar(produto);
-        return produto;
+    public ProdutoModel cadastrar(ProdutoModel model) {
+        Produto produto = new Produto(model);
+        return new ProdutoModel(produtoRepository.save(produto));
     }
 
     @Override
-    public Produto alterar(UUID id, ProdutoModel model) {
-        Produto produto = this.consultar(id);
-        return produto.editar(model.getNome(), model.getValor());
+    public ProdutoModel alterar(ProdutoModel model) {
+        var produto = this.buscarProdutoId(model.getId());
+        produto.editar(model.getNome(), model.getValor());
+        return new ProdutoModel(this.produtoRepository.save(produto));
     }
 
     @Override
-    public Produto remover(UUID id) {
-        Produto produto = this.consultar(id);
-        produtoRepository.remover(produto);
-        return produto;
+    public ProdutoModel remover(UUID id) {
+        Produto produto = this.buscarProdutoId(id);
+        produtoRepository.delete(produto);
+        return new ProdutoModel(produto);
+    }
+
+    private Produto buscarProdutoId(UUID id) {
+        return produtoRepository
+                .findById(id)
+                .orElseThrow(NaoExisteException::new);
     }
 }

@@ -1,5 +1,7 @@
 package br.com.triersistemas.solar.domain;
 
+import br.com.triersistemas.solar.model.ClienteModel;
+import br.com.triersistemas.solar.model.ProdutoModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,5 +31,10 @@ public class Produto {
         this.nome = nome;
         this.valor = valor;
         return this;
+    }
+
+    public Produto(ProdutoModel model){
+        this.nome = model.getNome();
+        this.valor = model.getValor();
     }
 }

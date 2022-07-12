@@ -8,15 +8,15 @@ import java.util.UUID;
 
 public interface FornecedorService {
 
-    List<Fornecedor> consultar();
+    List<FornecedorModel> consultar();
 
-    Fornecedor consultar(UUID id);
+    FornecedorModel consultar(UUID id);
 
-    Fornecedor cadastrar(FornecedorModel model);
-    Fornecedor cadastrarRandon();
+    FornecedorModel cadastrar(FornecedorModel model);
+    FornecedorModel cadastrarRandon();
 
-    Fornecedor alterar(UUID id, FornecedorModel model);
+    FornecedorModel alterar(FornecedorModel model);
 
-    Fornecedor remover(UUID id);
+    FornecedorModel remover(UUID id);
 
 }

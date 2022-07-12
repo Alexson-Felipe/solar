@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public class FornecedorRepositoryImpl implements FornecedorRepository {
+public class FornecedorRepositoryImpl  {
 
+    /*
     private static final List<Fornecedor> LIST = new ArrayList<>();
 
     @Override
@@ -33,4 +33,6 @@ public class FornecedorRepositoryImpl implements FornecedorRepository {
     public void remover(Fornecedor fornecedor) {
         LIST.remove(fornecedor);
     }
+
+     */
 }

@@ -57,7 +57,7 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public Pedido adicionarProdutos(UUID id, AdicionarPedidoModel model) {
+    public PedidoModel adicionarProdutos(UUID id, AdicionarPedidoModel model) {
         var pedido = pedidoRepository.consultar(id)
                 .orElseThrow(NaoExisteException::new);
 

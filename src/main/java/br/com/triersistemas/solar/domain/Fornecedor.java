@@ -1,5 +1,7 @@
 package br.com.triersistemas.solar.domain;
 
+import br.com.triersistemas.solar.model.ClienteModel;
+import br.com.triersistemas.solar.model.FornecedorModel;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -26,6 +28,11 @@ public class Fornecedor extends PessoaJuridica {
 
     public Fornecedor(final String nome, final LocalDate aniver, final String cnpj) {
         super(nome, aniver, cnpj);
+        this.produtos = new ArrayList<>();
+    }
+
+    public Fornecedor(FornecedorModel model){
+        super(model.getNome(), model.getAniver(), model.getCnpj());
         this.produtos = new ArrayList<>();
     }
 

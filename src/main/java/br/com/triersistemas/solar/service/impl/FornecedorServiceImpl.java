@@ -19,40 +19,42 @@ public class FornecedorServiceImpl implements FornecedorService {
 
 
     @Override
-    public List<Fornecedor> consultar() {
-        return fornecedorRepository.consultar();
+    public List<FornecedorModel> consultar() {
+        return fornecedorRepository.findAll().stream().map(FornecedorModel::new).toList();
     }
 
     @Override
-    public Fornecedor consultar(UUID id) {
-        return fornecedorRepository.consultar(id).orElseThrow(NaoExisteException::new);
+    public FornecedorModel consultar(UUID id) {
+        return new FornecedorModel(this.buscarFornecedorId(id));
     }
 
     @Override
-    public Fornecedor cadastrar(FornecedorModel model) {
-        Fornecedor fornecedor = new Fornecedor(model.getNome(), model.getAniver(), model.getCnpj());
-        fornecedorRepository.cadastrar(fornecedor);
-        return fornecedor;
+    public FornecedorModel cadastrar(FornecedorModel model) {
+        var fornecedor = new Fornecedor(model);
+        return new FornecedorModel(fornecedorRepository.save(fornecedor));
     }
 
     @Override
-    public Fornecedor cadastrarRandon() {
-        Fornecedor fornecedor = new Fornecedor();
-        fornecedorRepository.cadastrar(fornecedor);
-        return fornecedor;
+    public FornecedorModel cadastrarRandon() {
+        var fornecedor = new Fornecedor();
+        return new FornecedorModel(fornecedorRepository.save(fornecedor));
     }
 
     @Override
-    public Fornecedor alterar(UUID id, FornecedorModel model) {
-        Fornecedor fornecedor = this.consultar(id);
+    public FornecedorModel alterar(FornecedorModel model) {
+        var fornecedor = this.buscarFornecedorId(model.getId());
         fornecedor.editar(model.getNome(), model.getAniver(), model.getCnpj());
-        return fornecedor;
+        return new FornecedorModel(this.fornecedorRepository.save(fornecedor));
     }
 
     @Override
-    public Fornecedor remover(UUID id) {
-        Fornecedor fornecedor = this.consultar(id);
-        fornecedorRepository.remover(fornecedor);
-        return fornecedor;
+    public FornecedorModel remover(UUID id) {
+        Fornecedor fornecedor = this.buscarFornecedorId(id);
+        fornecedorRepository.delete(fornecedor);
+        return new FornecedorModel(fornecedor);
+    }
+
+    private Fornecedor buscarFornecedorId(UUID id){
+        return fornecedorRepository.findById(id).orElseThrow(NaoExisteException::new);
     }
 }
