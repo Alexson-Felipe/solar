@@ -1,6 +1,5 @@
 package br.com.triersistemas.solar.controller;
 
-import br.com.triersistemas.solar.domain.Cliente;
 import br.com.triersistemas.solar.model.ClienteModel;
 import br.com.triersistemas.solar.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +17,27 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping("/consultar")
-    public List<Cliente> consultar() {
+    public List<ClienteModel> consultar() {
         return clienteService.consultar();
     }
 
+    @GetMapping("/consultar/{id}")
+    public ClienteModel consultar(@PathVariable UUID id) {
+        return clienteService.consultar(id);
+    }
+
     @PostMapping("/cadastrar")
-    public Cliente cadastrar(@RequestBody ClienteModel model) {
+    public ClienteModel cadastrar(@RequestBody ClienteModel model) {
         return clienteService.cadastrar(model);
     }
 
-    @PutMapping("/alterar/{id}")
-    public Cliente alterar(@PathVariable UUID id, @RequestBody ClienteModel model) {
-        return clienteService.alterar(id, model);
+    @PutMapping("/alterar")
+    public ClienteModel alterar(@RequestBody ClienteModel model) {
+        return clienteService.alterar(model);
     }
 
     @DeleteMapping("/remover/{id}")
-    public Cliente remover(@PathVariable UUID id) {
+    public ClienteModel remover(@PathVariable UUID id) {
         return clienteService.remover(id);
     }
 }

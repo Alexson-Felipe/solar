@@ -1,5 +1,6 @@
 package br.com.triersistemas.solar.service.impl;
 
+import br.com.triersistemas.solar.domain.Cliente;
 import br.com.triersistemas.solar.domain.Pedido;
 import br.com.triersistemas.solar.exceptions.NaoExisteException;
 import br.com.triersistemas.solar.model.AdicionarPedidoModel;
@@ -47,7 +48,7 @@ public class PedidoServiceImpl implements PedidoService {
 
         var farmaceutico = farmaceuticoService.consultar(model.getIdFarmaceutico());
 
-        var cliente = clienteService.consultar(model.getIdCliente());
+        Cliente cliente = new Cliente(clienteService.consultar(model.getIdCliente()));
 
         Pedido pedido = new Pedido(farmaceutico, cliente);
         pedidoRepository.cadastrar(pedido);
