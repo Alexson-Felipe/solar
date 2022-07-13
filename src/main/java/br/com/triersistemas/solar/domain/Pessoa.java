@@ -2,6 +2,8 @@ package br.com.triersistemas.solar.domain;
 
 import br.com.triersistemas.solar.helper.StringUtils;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
@@ -13,12 +15,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 @MappedSuperclass
 public abstract class Pessoa {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String nome;
     private LocalDate aniver;
 
     protected Pessoa() {
-        this.id = UUID.randomUUID();
         this.aniver = LocalDate.now();
         this.nome = StringUtils.getRandomName();
     }

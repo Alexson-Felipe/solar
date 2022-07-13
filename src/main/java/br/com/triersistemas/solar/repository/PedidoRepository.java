@@ -1,13 +1,15 @@
 package br.com.triersistemas.solar.repository;
 
 import br.com.triersistemas.solar.domain.Pedido;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-public interface PedidoRepository {
+@Repository
+public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
 
+    /*
     List<Pedido> consultar();
 
     Optional<Pedido> consultar(UUID id);
@@ -15,5 +17,7 @@ public interface PedidoRepository {
     void cadastrar(Pedido pedido);
 
     void remover(Pedido pedido);
+
+     */
 
 }

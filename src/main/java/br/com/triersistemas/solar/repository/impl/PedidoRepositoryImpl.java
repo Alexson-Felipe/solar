@@ -1,17 +1,7 @@
 package br.com.triersistemas.solar.repository.impl;
 
-import br.com.triersistemas.solar.domain.Pedido;
-import br.com.triersistemas.solar.repository.PedidoRepository;
-import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-@Repository
-public class PedidoRepositoryImpl implements PedidoRepository {
-
+public class PedidoRepositoryImpl {
+/*
     private static final List<Pedido> LIST = new ArrayList<>();
 
 
@@ -34,6 +24,8 @@ public class PedidoRepositoryImpl implements PedidoRepository {
     public void remover(Pedido pedido) {
         LIST.remove(pedido);
     }
+
+ */
 
 
 }

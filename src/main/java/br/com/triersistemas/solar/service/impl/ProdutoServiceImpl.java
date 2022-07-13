@@ -1,6 +1,5 @@
 package br.com.triersistemas.solar.service.impl;
 
-import br.com.triersistemas.solar.domain.Cliente;
 import br.com.triersistemas.solar.domain.Produto;
 import br.com.triersistemas.solar.exceptions.NaoExisteException;
 import br.com.triersistemas.solar.model.ProdutoModel;
@@ -20,7 +19,8 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public List<ProdutoModel> consultar() {
-        return produtoRepository.findAll().stream().map(ProdutoModel::new).toList();
+        return produtoRepository
+                .findAll().stream().map(ProdutoModel::new).toList();
     }
 
     @Override
@@ -29,10 +29,14 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public ProdutoModel consultar(List<UUID> idProdutos) {
-        var idP = idProdutos.stream().filter(p -> p.equals(produtoRepository.findAll())).findFirst().orElseThrow(NaoExisteException::new);
-        return new ProdutoModel(this.buscarProdutoId(idP));
+    public List<ProdutoModel> consultar(List<UUID> idProdutos) {
+        //var idP = idProdutos.stream().filter(p -> p.equals(produtoRepository.findAllById(idProdutos))).findFirst().orElseThrow(NaoExisteException::new);
+        return produtoRepository.findAllById(idProdutos).stream().map(ProdutoModel::new).toList();
 
+    }
+
+    protected List<Produto> consultarProdutos(List<UUID> idProdutos) {
+        return produtoRepository.findAllById(idProdutos);
     }
 
     @Override

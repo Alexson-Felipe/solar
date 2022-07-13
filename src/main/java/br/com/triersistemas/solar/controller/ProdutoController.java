@@ -1,6 +1,5 @@
 package br.com.triersistemas.solar.controller;
 
-import br.com.triersistemas.solar.domain.Produto;
 import br.com.triersistemas.solar.model.ProdutoModel;
 import br.com.triersistemas.solar.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,15 @@ public class ProdutoController {
     @GetMapping("/consultar")
     public List<ProdutoModel> consultar() {
         return produtoService.consultar();
+    }
+    @GetMapping("/consultar/{id}")
+    public ProdutoModel consultar(@PathVariable UUID id) {
+        return produtoService.consultar(id);
+    }
+
+    @PostMapping("/consultar")
+    public List<ProdutoModel> consultar(@RequestBody List<UUID> ids) {
+        return produtoService.consultar(ids);
     }
 
     @PostMapping("/cadastrar")

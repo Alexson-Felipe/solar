@@ -34,6 +34,10 @@ public class FarmaceuticoServiceImpl implements FarmaceuticoService {
         return new FarmaceuticoModel(farmaceuticoRepository.save(farmaceutico));
     }
 
+    protected Farmaceutico consultarFarmaceuticoId(UUID id) {
+        return this.buscarFarmaceuticoId(id);
+    }
+
     @Override
     public FarmaceuticoModel cadastrarRandon() {
         var farmaceutico = new Farmaceutico();

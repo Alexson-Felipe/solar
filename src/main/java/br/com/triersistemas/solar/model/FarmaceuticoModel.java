@@ -21,6 +21,7 @@ public class FarmaceuticoModel {
     private String documento;
     private Boolean documentoValido;
     public FarmaceuticoModel(Farmaceutico farmaceutico) {
+        this.id = farmaceutico.getId();
         this.nome = farmaceutico.getNome();
         this.aniver = farmaceutico.getAniver();
         this.cpf = farmaceutico.getDocumento();

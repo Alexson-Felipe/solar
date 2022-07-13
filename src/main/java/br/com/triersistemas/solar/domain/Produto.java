@@ -1,13 +1,10 @@
 package br.com.triersistemas.solar.domain;
 
-import br.com.triersistemas.solar.model.ClienteModel;
 import br.com.triersistemas.solar.model.ProdutoModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -17,12 +14,12 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Produto {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String nome;
     private BigDecimal valor;
 
     public Produto(final String nome, final BigDecimal valor) {
-        this.id = UUID.randomUUID();
         this.nome = nome;
         this.valor = valor;
     }

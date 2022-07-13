@@ -1,6 +1,5 @@
 package br.com.triersistemas.solar.service;
 
-import br.com.triersistemas.solar.domain.Produto;
 import br.com.triersistemas.solar.model.ProdutoModel;
 
 import java.util.List;
@@ -10,7 +9,7 @@ public interface ProdutoService {
 
     List<ProdutoModel> consultar();
     ProdutoModel consultar(UUID id);
-    ProdutoModel consultar(List<UUID> idProdutos);
+    List<ProdutoModel> consultar(List<UUID> idProdutos);
     ProdutoModel cadastrar(ProdutoModel model);
     ProdutoModel alterar(ProdutoModel model);
 
